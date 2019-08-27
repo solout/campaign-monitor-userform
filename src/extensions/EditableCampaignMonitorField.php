@@ -2,13 +2,16 @@
 namespace SolutionsOutsourced\Fields;
 
 use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
@@ -97,12 +100,12 @@ class EditableCampaignMonitorField extends EditableFormField
             DropdownField::create("LastNameField", 'Last Name Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
             LiteralField::create("CampaignMonitorEnd", "<h4>Other Configuration</h4>"),
             DropdownField::create("FieldType", 'Field Type', array(
-                "HiddenField" => "HiddenField",
-                "DropdownField" => "DropdownField",
-                "OptionsetField" => "OptionsetField",
-                "CheckboxSetField" => "CheckboxSetField",
-                "TextField" => "TextField",
-                "CheckboxField" => "CheckboxField"
+                HiddenField::class => "HiddenField",
+                DropdownField::class => "DropdownField",
+                OptionsetField::class => "OptionsetField",
+                CheckboxSetField::class => "CheckboxSetField",
+                TextField::class => "TextField",
+                CheckboxField::class => "CheckboxField"
             ))
                 ->setEmptyString("Select a field type")
                 ->setDescription("Default type is CheckboxField"),
