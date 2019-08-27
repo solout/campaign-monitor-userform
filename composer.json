@@ -1,32 +1,33 @@
 {
-  "name": "mediabeast/campaign-monitor-userform",
-  "description": "Custom Userform Field which integrates with Campaign Monitor",
+    "name": "solout/campaign-monitor-userform",
+    "description": "Custom Userform Field which integrates with Campaign Monitor",
     "type": "silverstripe-vendormodule",
-  "homepage": "https://github.com/mediabeastnz/campaign-monitor-userform",
-  "keywords": ["silverstripe", "userform", "userforms", "campaign", "monitor", "email", "campaign monitor"],
-  "authors": [
-    {
-      "name": "Myles Beardsmore",
-      "email": "mediabeastnz@gmail.com"
-    },
-    {
-      "name": "Rowen Atkinson",
-      "email": "rowen@solutionsoutsourced.com.au"
-    }
+    "homepage": "https://github.com/solout/campaign-monitor-userform",
+    "keywords": ["silverstripe", "userform", "userforms", "campaign", "monitor", "email", "campaign monitor"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+          "name": "Myles Beardsmore",
+          "email": "mediabeastnz@gmail.com"
+        },
+        {
+          "name": "Rowen Atkinson",
+          "email": "rowen@solutionsoutsourced.com.au"
+        }
 
-  ],
-  "support": {
-    "issues": "https://github.com/mediabeastnz/campaign-monitor-userform/issues"
-  },
-  "require": {
-    "silverstripe/framework": "~4",
-    "silverstripe/cms": "~4",
-    "silverstripe/userforms": "^5.4",
-    "campaignmonitor/createsend-php": "5.*"
-  },
-  "autoload": {
+      ],
+    "support": {
+        "issues": "https://github.com/mediabeastnz/campaign-monitor-userform/issues"
+      },
+      "require": {
+        "silverstripe/framework": "~4",
+        "silverstripe/cms": "~4",
+        "silverstripe/userforms": "^5.4",
+        "campaignmonitor/createsend-php": "5.*"
+      },
+    "autoload": {
         "psr-4": {
-            "SolutionsOutsourced\\CampaignMonitor\\": "src/"
+            "SolutionsOutsourced": "src/"
         }
     }
 }

@@ -1,14 +1,21 @@
 <?php
-/**
- * Creates an editable field that allows users to choose a list
- * From Campaign Monitor and choose default fields
- * On submission of the form a new subscription will be created
- *
- *
- * @package campaign-monitor-userform
- */
+namespace Mediabeast\Fields;
+
+use
+    /**
+     * Creates an editable field that allows users to choose a list
+     * From Campaign Monitor and choose default fields
+     * On submission of the form a new subscription will be created
+     *
+     *
+     * @package campaign-monitor-userform
+     */
 class EditableCampaignMonitorField extends EditableFormField
 {
+
+
+    private static $table_name = 'EditableCampaignMonitorField';
+
     /**
      * @var string
      */
@@ -42,8 +49,9 @@ class EditableCampaignMonitorField extends EditableFormField
      * @var array
      */
     private static $has_many = array(
-        "CustomOptions" => "EditableCustomOption"
+        "CustomOptions" => EditableCustomOption::class
     );
+
 
     /**
      * @return FieldList
@@ -119,6 +127,7 @@ class EditableCampaignMonitorField extends EditableFormField
 
         return $fields;
     }
+
 
     /**
      * @return NumericField
