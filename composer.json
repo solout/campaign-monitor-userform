@@ -1,7 +1,7 @@
 {
   "name": "mediabeast/campaign-monitor-userform",
   "description": "Custom Userform Field which integrates with Campaign Monitor",
-  "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
   "homepage": "https://github.com/mediabeastnz/campaign-monitor-userform",
   "keywords": ["silverstripe", "userform", "userforms", "campaign", "monitor", "email", "campaign monitor"],
   "authors": [
