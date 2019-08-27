@@ -1,4 +1,9 @@
 <?php
+namespace SolutionsOutsourced\Models;
+
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\DataObject;
+use SolutionsOutsourced\Fields\EditableCampaignMonitorField;
 
 /**
  * Custom dataobject specifically for Campaign Monitor Field Type
@@ -7,6 +12,7 @@
  */
 class EditableCustomOption extends DataObject
 {
+    private static $table_name = 'EditableCustomOption';
 
     private static $default_sort = "Sort";
 
@@ -18,7 +24,7 @@ class EditableCustomOption extends DataObject
     );
 
     private static $has_one = array(
-        "EditableCampaignMonitorField" => "EditableCampaignMonitorField",
+        "EditableCampaignMonitorField" => EditableCampaignMonitorField::class,
     );
 
     private static $summary_fields = array(

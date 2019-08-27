@@ -1,8 +1,26 @@
 <?php
-namespace Mediabeast\Fields;
+namespace SolutionsOutsourced\Fields;
 
-use
-    /**
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\UserForms\Model\EditableFormField;
+use SilverStripe\View\ArrayData;
+use SolutionsOutsourced\Models\EditableCustomOption;
+use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
+use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
+use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
+
+
+/**
      * Creates an editable field that allows users to choose a list
      * From Campaign Monitor and choose default fields
      * On submission of the form a new subscription will be created
@@ -74,7 +92,7 @@ class EditableCampaignMonitorField extends EditableFormField
             DropdownField::create("ListID", 'Subscripers List', $this->getLists()->map("ListID", "Name"))
                 ->setEmptyString("Choose a Campaign Monitor List")
                 ->setAttribute("disabled", $fieldsStatus),
-            DropdownField::create("EmailField", 'Email Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
+            DropdownField ::create("EmailField", 'Email Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
             DropdownField::create("FirstNameField", 'First Name Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
             DropdownField::create("LastNameField", 'Last Name Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
             LiteralField::create("CampaignMonitorEnd", "<h4>Other Configuration</h4>"),
@@ -166,7 +184,7 @@ class EditableCampaignMonitorField extends EditableFormField
     {
         $optionSet = $this->CustomOptions();
         $optionMap = $optionSet->map('EscapedTitle', 'Title');
-        if ($optionMap instanceof SS_Map) {
+        if ($optionMap instanceof SS_Map ) {
             return $optionMap->toArray();
         }
         return $optionMap;
@@ -191,7 +209,7 @@ class EditableCampaignMonitorField extends EditableFormField
         if (isset($data[$this->Name]) && $this->getLists()->Count() > 0) {
             $this->extend('beforeValueFromData', $data);
             $auth = array(null, 'api_key' => $this->config()->get('api_key'));
-            $wrap = new CS_REST_Subscribers($this->owner->getField('ListID'), $auth);
+            $wrap = new \CS_REST_Subscribers($this->owner->getField('ListID'), $auth);
 
             $custom_fields = $this->getCustomFields($data);
             if (empty($custom_fields)) { $custom_fields = array(); }
@@ -231,7 +249,7 @@ class EditableCampaignMonitorField extends EditableFormField
     public function getLists()
     {
         $auth = array('api_key' => $this->config()->get('api_key'));
-        $wrap = new CS_REST_Clients($this->config()->get('client_id'), $auth);
+        $wrap = new \CS_REST_Clients($this->config()->get('client_id'), $auth);
 
         $result = $wrap->get_lists();
         $cLists = array();
