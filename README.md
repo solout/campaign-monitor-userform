@@ -10,7 +10,7 @@ composer require mediabeast/campaign-monitor-userform
 ##### Configuration
 To connect to your campaign monitor field you will need to set two fields in your config.yml.
 ```
-EditableCampaignMonitorField:
+SolutionsOutsourced\Fields\EditableCampaignMonitorField:
     api_key: 'API KEY GOES HERE'
     client_id: 'CLIENT ID GOES HERE'
 ```
@@ -21,7 +21,7 @@ You can also change what type of field is actually used on the UserForm.
 By Default it's a checkbox field. You can change this via your config.yml OR via the CMS per form.
 If you choose to use a DropdownField you can add options under the Custom Options tab.
 ```
-EditableCampaignMonitorField:
+SolutionsOutsourced\Fields\EditableCampaignMonitorField:
     defaultFieldType: 'DropdownField'
 ```
 
