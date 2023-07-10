@@ -209,7 +209,7 @@ class EditableCampaignMonitorField extends EditableFormField
     public function getValueFromData($data)
     {
         // if this field was set and there are lists - subscriper the user
-        if (isset($data[$this->Name]) && $this->getLists()->Count() > 0) {
+        if (array_key_exists($this->Name, $data) && $this->getLists()->Count() > 0) {
             $this->extend('beforeValueFromData', $data);
             $auth = array(null, 'api_key' => $this->config()->get('api_key'));
             $wrap = new \CS_REST_Subscribers($this->owner->getField('ListID'), $auth);
@@ -217,11 +217,16 @@ class EditableCampaignMonitorField extends EditableFormField
             $custom_fields = $this->getCustomFields($data);
             if (empty($custom_fields)) { $custom_fields = array(); }
 
+            $consent = 'no';
+
+            // @TODO - add consent to track funtionality
+
             $dataToSend = array(
                 'EmailAddress' => $data[$this->owner->getField('EmailField')],
                 'Name' => $data[$this->owner->getField('FirstNameField')].' '.$data[$this->owner->getField('LastNameField')],
                 'Resubscribe' => true,
-                'CustomFields' => $custom_fields
+                'CustomFields' => $custom_fields,
+                'ConsentToTrack' => $consent
             );
 
             $result = $wrap->add($dataToSend);
