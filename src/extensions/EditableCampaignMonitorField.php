@@ -63,7 +63,8 @@ class EditableCampaignMonitorField extends EditableFormField
         'ListID' => 'Varchar(255)',
         'EmailField' => 'Varchar(255)',
         'FirstNameField' => 'Varchar(255)',
-        'LastNameField' => 'Varchar(255)'
+        'LastNameField' => 'Varchar(255)',
+        'ConsentField' => 'Varchar(255)',
     );
 
     /**
@@ -98,6 +99,7 @@ class EditableCampaignMonitorField extends EditableFormField
             DropdownField ::create("EmailField", 'Email Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
             DropdownField::create("FirstNameField", 'First Name Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
             DropdownField::create("LastNameField", 'Last Name Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
+            DropdownField::create("ConsentField", 'Tracking Consent Field', $currentFromFields)->setAttribute("disabled", $fieldsStatus),
             LiteralField::create("CampaignMonitorEnd", "<h4>Other Configuration</h4>"),
             DropdownField::create("FieldType", 'Field Type', array(
                 HiddenField::class => "HiddenField",
@@ -218,8 +220,10 @@ class EditableCampaignMonitorField extends EditableFormField
             if (empty($custom_fields)) { $custom_fields = array(); }
 
             $consent = 'no';
-
-            // @TODO - add consent to track funtionality
+            $consentField = $this->owner->getField('ConsentField');
+            if (isset($data[$consentField]) && !empty($data[$consentField])) {
+                $consent = 'yes';
+            }
 
             $dataToSend = array(
                 'EmailAddress' => $data[$this->owner->getField('EmailField')],
