@@ -144,7 +144,7 @@ class EditableCampaignMonitorField extends EditableFormField
             $this->CustomOptions(),
             $optionsConfig
         );
-        $fields->insertAfter(new Tab('CustomOptions'), 'Main');
+        $fields->insertAfter('Main', new Tab('CustomOptions'));
         $fields->addFieldToTab('Root.CustomOptions', $optionsGrid);
 
 
