@@ -51,9 +51,4 @@ class EditableCustomOption extends DataObject
     {
         return ($this->EditableCampaignMonitorField()->canDelete($member));
     }
-
-    public function getEscapedTitle()
-    {
-        return Convert::raw2att($this->Title);
-    }
 }
