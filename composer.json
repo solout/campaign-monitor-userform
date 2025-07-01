@@ -23,7 +23,7 @@
         "silverstripe/framework": "~4|~5",
         "silverstripe/cms": "~4|~5",
         "silverstripe/userforms": "^5.4|~6",
-        "campaignmonitor/createsend-php": "6.*"
+        "campaignmonitor/createsend-php": "7.*"
       },
     "autoload": {
         "psr-4": {

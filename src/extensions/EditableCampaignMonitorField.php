@@ -1,6 +1,7 @@
 <?php
 namespace SolutionsOutsourced\Fields;
 
+use SilverStripe\Core\ClassInfo;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\DropdownField;
@@ -15,6 +16,7 @@ use SilverStripe\Forms\OptionsetField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\Map;
 use SilverStripe\UserForms\Model\EditableFormField;
 use SilverStripe\View\ArrayData;
 use SolutionsOutsourced\Models\EditableCustomOption;
@@ -24,13 +26,13 @@ use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
 
 
 /**
-     * Creates an editable field that allows users to choose a list
-     * From Campaign Monitor and choose default fields
-     * On submission of the form a new subscription will be created
-     *
-     *
-     * @package campaign-monitor-userform
-     */
+ * Creates an editable field that allows users to choose a list
+ * From Campaign Monitor and choose default fields
+ * On submission of the form a new subscription will be created
+ *
+ *
+ * @package campaign-monitor-userform
+ */
 class EditableCampaignMonitorField extends EditableFormField
 {
 
@@ -53,7 +55,7 @@ class EditableCampaignMonitorField extends EditableFormField
      * @var array
      * @config
      */
-    private static $defaultFieldType = "CheckboxField";
+    private static $defaultFieldType = CheckboxField::class;
 
     /**
      * @var array Fields on the user defined form page.
@@ -144,7 +146,7 @@ class EditableCampaignMonitorField extends EditableFormField
             $this->CustomOptions(),
             $optionsConfig
         );
-        $fields->insertAfter(new Tab('CustomOptions'), 'Main');
+        $fields->insertAfter('Main', new Tab('CustomOptions'));
         $fields->addFieldToTab('Root.CustomOptions', $optionsGrid);
 
 
@@ -165,15 +167,15 @@ class EditableCampaignMonitorField extends EditableFormField
         }
 
         // ensure format and data is correct based on type
-        if ($fieldType == 'DropdownField' || $fieldType == 'CheckboxSetField' || $fieldType == 'OptionsetField') {
-            $field = $fieldType::create($this->Name, $this->EscapedTitle, $this->getOptionsMap());
+        if (in_array($fieldType, [DropdownField::class, CheckboxSetField::class, OptionsetField::class])) {
+            $field = $fieldType::create($this->Name, $this->Title, $this->getOptionsMap());
         } else {
-            $field = $fieldType::create($this->Name, $this->EscapedTitle);
+            $field = $fieldType::create($this->Name, $this->Title);
         }
         // set defaults
         $defaultOption = $this->getDefaultOptions()->first();
         if ($defaultOption) {
-            $field->setValue($defaultOption->EscapedTitle);
+            $field->setValue($defaultOption->Title);
         }
 
         $this->doUpdateFormField($field);
@@ -188,8 +190,8 @@ class EditableCampaignMonitorField extends EditableFormField
     protected function getOptionsMap()
     {
         $optionSet = $this->CustomOptions();
-        $optionMap = $optionSet->map('EscapedTitle', 'Title');
-        if ($optionMap instanceof SS_Map ) {
+        $optionMap = $optionSet->map('Title', 'Title');
+        if ($optionMap instanceof Map ) {
             return $optionMap->toArray();
         }
         return $optionMap;
