@@ -20,9 +20,9 @@
         "issues": "https://github.com/mediabeastnz/campaign-monitor-userform/issues"
       },
       "require": {
-        "silverstripe/framework": "~4|~5",
-        "silverstripe/cms": "~4|~5",
-        "silverstripe/userforms": "^5.4|~6",
+        "silverstripe/framework": "~5",
+        "silverstripe/cms": "~5",
+        "silverstripe/userforms": "~6",
         "campaignmonitor/createsend-php": "6.*"
       },
     "autoload": {
