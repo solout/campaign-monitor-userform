@@ -167,9 +167,9 @@ class EditableCampaignMonitorField extends EditableFormField
 
         // ensure format and data is correct based on type
         if ($fieldType == DropdownField::class || $fieldType == CheckboxSetField::class || $fieldType == OptionsetField::class) {
-            $field = $fieldType::create($this->Name, $this->EscapedTitle, $this->getOptionsMap());
+            $field = $fieldType::create($this->Name, $this->Title ?: false, $this->getOptionsMap());
         } else {
-            $field = $fieldType::create($this->Name, $this->EscapedTitle);
+            $field = $fieldType::create($this->Name, $this->Title ?: false);
         }
         // set defaults
         $defaultOption = $this->getDefaultOptions()->first();
